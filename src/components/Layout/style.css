@@ -1,0 +1,38 @@
+
+
+h1 {
+    color: var(--quaternary-color)
+}
+
+footer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    color: var(--secondary-color) !important;
+    background-color: dimgray;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--secondary-color) !important;
+}
+
+.navbar-custom > *{
+  background-color: var(--primary-color) !important;
+  color: var(--secondary-color) !important;
+}
+
+.dropdown-menu-dark-custom {
+    background-color: var(--primary-color) !important;
+}
+
+#home-banner {
+    background-image: url('../../images/undraw_web_shopping_re_owap.svg');
+    height: 100vh;
+    padding: 1rem;
+}
+
+#home-banner h1{
+    font-size: 4.8rem;
+    font-style: italic;
+    color: var(--primary-color);
+}

@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+import { login } from "./redux/actions/userActionCreators";
+import Layout from './components/Layout';
+import Home from './components/Home'
+import Users from './components/Users';
+import Products from './pages/Products';
+import Categories from './pages/Categories';
+import Stores from './pages/Stores';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import PublicRoute from './routes/PublicRoute';
+import PrivateRoute from './routes/PrivateRoute';
+import ViewStore from './components/Stores/ViewStore';
+import UpdateStore from './components/Stores/UpdateStore';
 
 function App() {
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem('user'))
+  const token = localStorage.getItem('token')
+  console.log({user});
+  if (user && token) {
+    dispatch(login(user, token))
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Switch>
+        <PrivateRoute exact path="/home" component={Home} />
+        <PublicRoute exact path="/login" component={Login} />
+        <PublicRoute exact path="/register" component={Register} />
+        <PrivateRoute exact path="/stores" component={Stores} />
+        <PrivateRoute exact path="/stores/:id" component={ViewStore} />
+        <PrivateRoute exact path="/stores/update/:id" component={UpdateStore} />
+        <PrivateRoute exact path="/categories" component={Categories} />
+        <PrivateRoute exact path="/products" component={Products} />
+        <PrivateRoute exact path="/users" component={Users} />
+      </Switch>
+    </Layout>
   );
 }
 
