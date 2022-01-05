@@ -3,21 +3,18 @@ import { Button, ButtonGroup, Container, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-const products = []
-
-export default function ProductsTable() {
-    const productsList = products.map((product, index) => {
-        return <tr key={product.id}>
+export default function ProductsTable(props) {
+    const productsList = props.productsList.map((product, index) => {
+        return <tr key={product._id}>
             <td>{index + 1}</td>
-            <td>{product.name}</td>
-            <td>{product.productType}</td>
-            <td>{product.location}</td>
-            <td>{product.description}</td>
+            <td>{product.reference}</td>
+            <td>{product.label}</td>
+            <td>{product.unitPrice}</td>
             <td>
                 <ButtonGroup >
-                    <Button className='mx-1' size="sm" variant="success" tag={Link} to={"/products/" + product.id}><i className="bi bi-eye"></i></Button>
-                    <Button className='mx-1' size="sm" variant="primary" tag={Link} to={"/products/" + product.id}><i className="bi bi-pencil-square"></i></Button>
-                    <Button className='mx-1' size="sm" variant="danger" onClick={() => this.remove(product.id)}><i className="bi bi-trash"></i></Button>
+                    <Button className='mx-1 custom-table-button' size="sm"  tag={Link} to={"/products/" + product.id}><i className="bi bi-eye"></i></Button>
+                    <Button className='mx-1 custom-table-button' size="sm"  tag={Link} to={"/products/" + product.id}><i className="bi bi-pencil-square"></i></Button>
+                    <Button className='mx-1 custom-table-button' size="sm"  onClick={() => this.remove(product.id)}><i className="bi bi-trash"></i></Button>
                 </ButtonGroup>
             </td>
         </tr>
@@ -28,10 +25,9 @@ export default function ProductsTable() {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Location</th>
-                        <th>Description</th>
+                        <th>Reference</th>
+                        <th>Label</th>
+                        <th>Unit Price</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

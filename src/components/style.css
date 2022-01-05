@@ -22,3 +22,24 @@
     background-color: var(--quinary-color);
     border-color: var(--quinary-color);
 }
+
+.custom-spinner {
+    color: var(--quaternary-color);
+}
+
+.page-link{
+    background-color: var(--secondary-color);
+    color: var(--quaternary-color);
+}
+.page-link:hover{
+    color: var(--secondary-color);
+    background-color: var(--quaternary-color);
+}
+.page-item.active .page-link{
+    background-color: var(--quaternary-color);
+    border-color: var(--quaternary-color);
+}
+
+.full-width {
+    width: 100%;
+}
