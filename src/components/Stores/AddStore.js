@@ -7,7 +7,6 @@ import { alertError, alertSuccess } from '../../utils/feedback';
 
 
 export default function AddStore(props) {
-
     const dispatch = useDispatch()
     const [newStoreData, setNewStoreData] = useState({
         name: '',
@@ -81,7 +80,7 @@ export default function AddStore(props) {
                     keyboard={false}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Record</Modal.Title>
+                        <Modal.Title>Add Store</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <form onSubmit={handleSubmit}>

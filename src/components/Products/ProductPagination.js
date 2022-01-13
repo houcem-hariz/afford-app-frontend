@@ -14,12 +14,12 @@ export default function ProductPagination({ productsPerPage, totalProductsCount,
         <ul className='pagination flex-wrap'>
           {pageNumbers.map(number => (
             <li key={number} className={(currentPage === number ? 'active ' : '') + 'controls page-item mx-1' }>
-              <a onClick={() => {
+              <button onClick={() => {
                   paginate(number);
                   setCurrentPage(number)
                 }} className='page-link'>
                 {number}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

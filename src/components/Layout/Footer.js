@@ -34,7 +34,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <p className="text-muted footer-copyright text-center py-3 mt-5 mb-3 ">
+            <p className="footer-copyright text-center py-3 mt-5 mb-3 ">
                 Copyright &copy; <Link className="footer-copyright text-center py-3" to='/'><b>Afford App</b></Link> {new Date().getFullYear()}.
             </p>
         </footer>

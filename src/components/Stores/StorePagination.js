@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function StorePagination({ storesPerPage, totalStoresCount, paginate }) {
     const pageNumbers = [];
@@ -8,20 +8,33 @@ export default function StorePagination({ storesPerPage, totalStoresCount, pagin
     for (let i = 1; i <= Math.ceil(totalStoresCount / storesPerPage); i++) {
       pageNumbers.push(i);
     }
+
+    const generatePageNumbers = () => {
+      return pageNumbers.map(number => (
+        <li key={number} className={(currentPage === number ? 'active ' : '') + 'controls page-item custom-page-item mx-1' }>
+          <button onClick={() => {
+              paginate(number);
+              setCurrentPage(number)
+            }} className='page-link custom-page-link'>
+            {number}
+          </button>
+        </li>
+      ))
+    }
+    
+    useEffect(()=> {
+      generatePageNumbers()
+    }, [currentPage])
+
+    useEffect(()=> {
+      return () => setCurrentPage(1)
+    }, [totalStoresCount])
   
+    const pages = generatePageNumbers()
     return (
       <nav>
         <ul className='pagination flex-wrap'>
-          {pageNumbers.map(number => (
-            <li key={number} className={(currentPage === number ? 'active ' : '') + 'controls page-item mx-1' }>
-              <a onClick={() => {
-                  paginate(number);
-                  setCurrentPage(number)
-                }} className='page-link'>
-                {number}
-              </a>
-            </li>
-          ))}
+          {pages}
         </ul>
       </nav>
     );

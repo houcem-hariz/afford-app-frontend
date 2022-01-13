@@ -10,6 +10,8 @@ export default function ProductsTable(props) {
             <td>{product.reference}</td>
             <td>{product.label}</td>
             <td>{product.unitPrice}</td>
+            <td>{product.store.name}</td>
+            <td>{product.category.name}</td>
             <td>
                 <ButtonGroup >
                     <Button className='mx-1 custom-table-button' size="sm"  tag={Link} to={"/products/" + product.id}><i className="bi bi-eye"></i></Button>
@@ -28,6 +30,8 @@ export default function ProductsTable(props) {
                         <th>Reference</th>
                         <th>Label</th>
                         <th>Unit Price</th>
+                        <th>Store</th>
+                        <th>Category</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

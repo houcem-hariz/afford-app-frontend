@@ -1,7 +1,8 @@
 import {
     SET_ALL_CATEGORIES,
     SELECT_CATEGORY,
-    REMOVE_CATEGORY
+    REMOVE_CATEGORY,
+    ADD_CATEGORY
 } from '../types/categoriesTypes';
 
 export const setAllCategories = (categories) => ({ type: SET_ALL_CATEGORIES, payload: categories });
@@ -9,3 +10,6 @@ export const setAllCategories = (categories) => ({ type: SET_ALL_CATEGORIES, pay
 export const selectCategory = (category) => ({ type: SELECT_CATEGORY, payload: category });
 
 export const removeCategory = (categoryId) => ({ type: REMOVE_CATEGORY, payload: categoryId });
+
+export const addCategory = (category) => ({ type: ADD_CATEGORY, payload: category });
+

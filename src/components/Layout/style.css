@@ -16,9 +16,14 @@ footer a {
     color: var(--secondary-color) !important;
 }
 
-.navbar-custom > *{
+.navbar-custom-light > *{
   background-color: var(--primary-color) !important;
   color: var(--secondary-color) !important;
+}
+
+.navbar-custom-dark > *{
+  background-color: var(--primary-color-dark) !important;
+  color: var(--secondary-color-dark) !important;
 }
 
 .dropdown-menu-dark-custom {

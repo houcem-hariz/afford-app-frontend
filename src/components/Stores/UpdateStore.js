@@ -57,7 +57,7 @@ function UpdateStore() {
     }
     return (
         <div className="container">
-            <h1>Update Store</h1>
+            <h1 className="text-center">Update Store</h1>
             <form onSubmit={handleSubmit}>
                 <Input 
                     label='Name'
@@ -83,7 +83,7 @@ function UpdateStore() {
                     name='description'
                     onChange={handleChange}
                 />
-                <Button className="custom-button" type="submit" style={{width: '100%'}}>Update</Button>
+                <button className="btn custom-button" type="submit" style={{width: '100%'}}>Update</button>
             </form>
         </div>
     )

@@ -1,18 +1,22 @@
 import axios from 'axios'
-import { useMemo, useState } from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { alertError } from '../utils/feedback'
 import Loading from '../components/Loading'
 import AddProduct from '../components/Products/AddProduct'
-import SearchBar from '../components/Products/SearchBar'
 import ProductsTable from '../components/Products/ProductsTable'
-import { setAllProducts } from '../redux/actions/productsActionCreator'
-import { alertError } from '../utils/feedback'
 import ProductPagination from '../components/Products/ProductPagination'
+import SelectCategory from '../components/Products/SelectCategory'
+import SelectStore from '../components/Products/SelectStore'
+import { setAllProducts } from '../redux/actions/productsActionCreator'
+import { setAllStores } from '../redux/actions/storesActionCreator'
+import { setAllCategories } from '../redux/actions/categoriesActionCreator'
 
 export default function Products() {
-    
+
     const dispatch = useDispatch()
-    
+
     // Add Product Modal management
     const [showAddModal, setShowAddModal] = useState(false);
     const handleClose = () => {
@@ -25,69 +29,117 @@ export default function Products() {
 
     // User token
     const token = useSelector(state => state.user.token)
-    
+
     // Pagination
     const [productsPerPage] = useState(5);
     const [totalProductsCount, setTotalProductsCount] = useState(0);
     const [skip, setSkip] = useState(0);
-    
+
     // Change page
-    const paginate = pageNumber =>  setSkip((pageNumber -1) * productsPerPage)
+    const paginate = pageNumber => setSkip((pageNumber - 1) * productsPerPage)
+
+    const productsData = useSelector(state => state.products.all)
 
     // Fetch products data from backend
     const getProducts = async () => {
         try {
             setIsDataLoaded(false)
-            const products = await axios.get(`${process.env.REACT_APP_API_URL}/products?limit=${productsPerPage}&skip=${skip}`, { headers: { authorization: token } })
-
-            dispatch(setAllProducts(products.data.products))
-            setTotalProductsCount(products.data.count)
-            setFilteredProductsList(products.data.products)
+            if (productsData.length === 0) {
+                const products = await axios.get(`${process.env.REACT_APP_API_URL}/products?limit=${productsPerPage}&skip=${skip}`, { headers: { authorization: token } })
+                dispatch(setAllProducts(products.data.products))
+                setTotalProductsCount(products.data.count)
+                setFilteredProductsList(products.data.products)
+            }
             setIsDataLoaded(true)
         } catch (error) {
             alertError(error.message)
         }
     }
-    
-    useMemo( () => {
+
+    let storesList = []
+    storesList = useSelector(state => state.stores.all)
+    const getStores = async () => {
+        try {
+
+            if (storesList.length === 0) {
+                // fetch stores list from database
+                const stores = await axios.get(`${process.env.REACT_APP_API_URL}/stores`, { headers: { authorization: token } })
+                storesList = stores.data.stores
+                dispatch(setAllStores(stores.data.stores))
+            }
+        } catch (error) {
+            alertError(error.message)
+        }
+    }
+
+    let categoriesList = []
+    categoriesList = useSelector(state => state.categories.all)
+    const getCategories = async () => {
+        try {
+
+            if (categoriesList.length === 0) {
+                // fetch categories list from database
+                const categories = await axios.get(`${process.env.REACT_APP_API_URL}/categories`, { headers: { authorization: token } })
+                categoriesList = categories.data.categories
+                console.log("cccc", categories.data.categories);
+                dispatch(setAllCategories(categories.data.categories))
+            }
+        } catch (error) {
+            alertError(error.message)
+        }
+    }
+
+    useEffect(() => {
+        getStores()
+        getCategories()
         getProducts()
     }, [])
-    
-    useMemo( () => {
+
+    useEffect(() => {
         getProducts()
     }, [skip])
-    
+
 
     // Filter search
-    const productsData = useSelector(state => state.products.all)
     let [filteredProductsList, setFilteredProductsList] = useState(productsData)
 
-    useMemo(() => {
+    useEffect(() => {
         setFilteredProductsList(productsData)
     }, [productsData])
 
-    const getUpdatedProductsList = (filterValue) => {
-        const productsList = productsData.filter(productName => {
-            return ((productName.reference.toLowerCase().includes(filterValue.toLowerCase())) ||
-                (productName.label.toLowerCase().includes(filterValue.toLowerCase())))
+
+    const filterByStoreName = (filterValue) => {
+        const filteredProductsByStore = productsData.filter(product => {
+            return ( (filterValue === '') || (product.store._id === filterValue) )
         })
-        setFilteredProductsList(productsList)
+        setFilteredProductsList(filteredProductsByStore)
     }
+
+    const filterByCategoryName = (filterValue) => {
+        const filteredProductsByCategory = productsData.filter(product => {
+            return ( (filterValue === '') || (product.category._id === filterValue) )
+        })
+        setFilteredProductsList(filteredProductsByCategory)
+    }
+
 
     return (
         <div className='container'>
             <div className='shadow-lg p-3 mx-5 rounded'>
-                <div className='row justify-content-between'>
-                    <div className="search col-4 mt-5 mb-4">
-                        <SearchBar handleFilterValue={getUpdatedProductsList} />
+                <div className='search row'>
+                    <div className="col-4 mt-5 mb-4">
+                        <SelectCategory handleCategoryFilter={filterByCategoryName}/>
                     </div>
                     <div className="col-4 mt-5 mb-4">
-                        <div className='d-flex justify-content-end'>
-                            <button className='custom-button px-3 py-1 text-nowrap rounded-pill' onClick={handleShow}>
-                                <i className="px-2 bi bi-plus-circle"></i> Add New Product
+                        <SelectStore handleStoreFilter={filterByStoreName} />
+                    </div>
+                    <div className="add-button col-4 mt-5 mb-4">
+                        <div>
+                            <button disabled className='custom-button px-1 py-1 rounded-pill' onClick={handleShow}>
+                                <i className="px-2 bi bi-plus-circle"></i>Add New Product
                             </button>
+                            <AddProduct  show={showAddModal} handleClose={handleClose} />
                         </div>
-                        <AddProduct show={showAddModal} handleClose={handleClose} />
                     </div>
                 </div>
                 <div className='row'>

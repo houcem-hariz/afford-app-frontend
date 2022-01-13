@@ -13,7 +13,7 @@ export default function SearchBar(props) {
         <div className="search">
             <form className="form-inline">
                 <input value={filter}
-                    onChange={event => handleInputChange(event.target.value)} className="form-control mr-sm-2" type="search" placeholder="Search Store ..." aria-label="Search" />
+                    onChange={event => handleInputChange(event.target.value)} className="form-control mr-sm-2" type="search" placeholder="Search ..." aria-label="Search" />
             </form>
         </div>
     )

@@ -1,7 +1,5 @@
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { login } from "./redux/actions/userActionCreators";
 import Layout from './components/Layout';
@@ -17,11 +15,12 @@ import PrivateRoute from './routes/PrivateRoute';
 import ViewStore from './components/Stores/ViewStore';
 import UpdateStore from './components/Stores/UpdateStore';
 
+import './index.css';
+
 function App() {
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem('user'))
   const token = localStorage.getItem('token')
-  console.log({user});
   if (user && token) {
     dispatch(login(user, token))
   }
@@ -29,6 +28,7 @@ function App() {
     <Layout>
       <Switch>
         <PrivateRoute exact path="/home" component={Home} />
+        <PrivateRoute exact path="/" component={Home} />
         <PublicRoute exact path="/login" component={Login} />
         <PublicRoute exact path="/register" component={Register} />
         <PrivateRoute exact path="/stores" component={Stores} />

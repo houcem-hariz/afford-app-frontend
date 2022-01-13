@@ -10,6 +10,12 @@
   --tertiary-color: #e3afbc;
   --quaternary-color: #9a1750;
   --quinary-color: #ee4c7c;
+
+  --primary-color-dark: #232730;
+  --secondary-color-dark: #c5f851;
+  --tertiary-color-dark: #e3afbc;
+  --quaternary-color-dark: #9a1750;
+  --quinary-color-dark: #ee4c7c;
 }
 
 .navbar-brand, .nav-link {
@@ -32,6 +38,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.dark-theme {
+  background-color: black !important;
+}
+
+h1, h2, h5 {
+  color: var(--primary-color);
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -43,10 +57,215 @@ body {
   justify-content: space-between;
 }
 
+.toggle-theme-button {
+  margin: 0.25rem;
+}
+
+body.dark {
+  background-color: #292c35;
+}
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.label {
+  width: 30px;
+  height: 16px;
+  background-color:#111;
+  display: flex;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px;
+  position: relative;
+  transform: scale(1.5);
+}
+
+.ball {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+/*  target the elemenent after the label*/
+.checkbox:checked + .label .ball{
+  transform: translateX(12px);
+}
+
+.label i {
+  font-size: 0.5rem;
+}
+
+.bi-moon-fill {
+  color: pink;
+}
+
+.bi-brightness-high-fill {
+  color: yellow;
+}
+
 .toast-success div {
   background-color: green;
 }
 
 .toast-error div {
   background-color: red;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.search > div:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.custom-button {
+  background-color: var(--quaternary-color) !important;
+  border-color: var(--quaternary-color) !important;
+  color: var(--secondary-color) !important;
+  /* border-width: 1px; */
+}
+
+.custom-button:hover {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--quaternary-color) !important;
+  color: var(--quaternary-color) !important;
+}
+
+.custom-button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.custom-table-button {
+  background-color: var(--secondary-color);
+  border-color: var(--quaternary-color);
+  color: var(--quaternary-color);
+}
+
+.custom-table-button:hover {
+  background-color: var(--quaternary-color);
+  border-color: var(--quaternary-color);
+}
+.custom-table-button:hover i{
+  color: var(--secondary-color);
+}
+
+.custom-spinner {
+  color: var(--quaternary-color);
+}
+
+.custom-select {
+  background-color: var(--secondary-color);
+  color: var(--quaternary-color);
+  border-color: var(--quaternary-color);
+}
+
+.custom-select:active,
+.custom-select:hover {
+  border-color: var(--quaternary-color);
+}
+
+.custom-form-check {
+  margin: 1rem 0;
+}
+
+.custom-select:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+.custom-page-link {
+  background-color: var(--secondary-color) !important;
+  color: var(--quaternary-color) !important;
+}
+
+.custom-page-link:hover {
+  color: var(--secondary-color) !important;
+  background-color: var(--quaternary-color) !important;
+}
+
+.page-item.active .page-link {
+  background-color: var(--quaternary-color) !important;
+  border-color: var(--quaternary-color) !important;
+  color: var(--secondary-color) !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.carousel-control-prev {
+  background-color: var(--quaternary-color);
+  color: var(--quaternary-color);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-indicators {
+  background-color: var(--quaternary-color);
+  border-radius: 0.5rem;
+}
+
+.carousel-item img {
+  width: 100%;
+}
+
+.carousel-item > h2 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.list-group-item {
+  background-color: transparent !important;
+}
+
+@media not all and (min-width: 576px) {
+  .search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100% !important;
+  }
+
+  .search > div:last-child {
+    order: -1;
+    justify-content: flex-start;
+  }
+}
+
+@media not all and (max-width: 768px) {
+  .carousel-item > h2 {
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .toggle-theme-button {
+    margin: 1rem;
+  }
+}
+@media not all and (max-width: 992px) {
+  .carousel-item img {
+    width: 70%;
+    margin: 0 auto;
+  }
 }
