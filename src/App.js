@@ -1,4 +1,4 @@
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { login } from "./redux/actions/userActionCreators";
@@ -16,6 +16,11 @@ import ViewStore from './components/Stores/ViewStore';
 import UpdateStore from './components/Stores/UpdateStore';
 
 import './index.css';
+import ViewCategory from './components/Categories/ViewCategory';
+import UpdateCategory from './components/Categories/UpdateCategory';
+import NotFound from './pages/NotFound';
+import ViewProduct from './components/Products/ViewProduct';
+import UpdateProduct from './components/Products/UpdateProduct';
 
 function App() {
   const dispatch = useDispatch()
@@ -35,8 +40,13 @@ function App() {
         <PrivateRoute exact path="/stores/:id" component={ViewStore} />
         <PrivateRoute exact path="/stores/update/:id" component={UpdateStore} />
         <PrivateRoute exact path="/categories" component={Categories} />
+        <PrivateRoute exact path="/categories/:id" component={ViewCategory} />
+        <PrivateRoute exact path="/categories/update/:id" component={UpdateCategory} />
         <PrivateRoute exact path="/products" component={Products} />
+        <PrivateRoute exact path="/products/:id" component={ViewProduct} />
+        <PrivateRoute exact path="/products/update/:id" component={UpdateProduct} />
         <PrivateRoute exact path="/users" component={Users} />
+        <Route component={NotFound} />
       </Switch>
     </Layout>
   );

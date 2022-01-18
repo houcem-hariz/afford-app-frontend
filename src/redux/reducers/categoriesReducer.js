@@ -16,8 +16,10 @@ const categoriesReducer = (state = initialState, action) => {
             return { ...state, all: action.payload };
         case SELECT_CATEGORY:
             return { ...state, selected: action.payload || null };
-        case REMOVE_CATEGORY:
-            return { ...state, all: state.all.filter(category => category._id !== action.payload) };
+        case REMOVE_CATEGORY:{
+            const categoriesWithDeletedRefs = state.all.filter(category => category.mainCategory !== action.payload)
+            return { ...state, all: categoriesWithDeletedRefs.filter(category => category._id !== action.payload) };
+        }
         case ADD_CATEGORY:
             return { ...state, all: [...state.all, action.payload] } 
         default:

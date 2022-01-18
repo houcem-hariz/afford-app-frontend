@@ -92,12 +92,12 @@ export default function AddCategory(props) {
                 <Modal.Body>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <input type="text" className="form-control" id="categoryName" aria-describedby="categoryName" name='name' placeholder="Enter Name" value={newCategoryData.name} onChange={handleChange}/>
+                            <input required type="text" className="form-control" id="categoryName" aria-describedby="categoryName" name='name' placeholder="Enter Name" value={newCategoryData.name} onChange={handleChange}/>
                         </div>
                         <div className="form-check custom-form-check">
                             <input className="form-check-input" type="checkbox" name='isMainCategory' onChange={handleCategoryCheck} id="mainCategory" />
                             <label className="form-check-label" htmlFor="mainCategory" >
-                                Is Main Category
+                                Is Main Category ?
                             </label>
                         </div>
                         <div>

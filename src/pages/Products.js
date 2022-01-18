@@ -38,71 +38,62 @@ export default function Products() {
     // Change page
     const paginate = pageNumber => setSkip((pageNumber - 1) * productsPerPage)
 
-    const productsData = useSelector(state => state.products.all)
 
     // Fetch products data from backend
     const getProducts = async () => {
         try {
             setIsDataLoaded(false)
-            if (productsData.length === 0) {
-                const products = await axios.get(`${process.env.REACT_APP_API_URL}/products?limit=${productsPerPage}&skip=${skip}`, { headers: { authorization: token } })
-                dispatch(setAllProducts(products.data.products))
-                setTotalProductsCount(products.data.count)
-                setFilteredProductsList(products.data.products)
-            }
+            const products = await axios.get(`${process.env.REACT_APP_API_URL}/products?limit=${productsPerPage}&skip=${skip}`, { headers: { authorization: token } })
+            dispatch(setAllProducts(products.data.products))
+            setTotalProductsCount(products.data.count)
+            setFilteredProductsList(products.data.products)
             setIsDataLoaded(true)
         } catch (error) {
             alertError(error.message)
         }
     }
-
+    
     let storesList = []
     storesList = useSelector(state => state.stores.all)
     const getStores = async () => {
         try {
-
-            if (storesList.length === 0) {
-                // fetch stores list from database
-                const stores = await axios.get(`${process.env.REACT_APP_API_URL}/stores`, { headers: { authorization: token } })
-                storesList = stores.data.stores
-                dispatch(setAllStores(stores.data.stores))
-            }
+            // fetch stores list from database
+            const stores = await axios.get(`${process.env.REACT_APP_API_URL}/stores`, { headers: { authorization: token } })
+            storesList = stores.data.stores
+            dispatch(setAllStores(stores.data.stores))
         } catch (error) {
             alertError(error.message)
         }
     }
-
+    
     let categoriesList = []
     categoriesList = useSelector(state => state.categories.all)
     const getCategories = async () => {
         try {
-
-            if (categoriesList.length === 0) {
-                // fetch categories list from database
-                const categories = await axios.get(`${process.env.REACT_APP_API_URL}/categories`, { headers: { authorization: token } })
-                categoriesList = categories.data.categories
-                console.log("cccc", categories.data.categories);
-                dispatch(setAllCategories(categories.data.categories))
-            }
+            // fetch categories list from database
+            const categories = await axios.get(`${process.env.REACT_APP_API_URL}/categories`, { headers: { authorization: token } })
+            categoriesList = categories.data.categories
+            dispatch(setAllCategories(categories.data.categories))
         } catch (error) {
             alertError(error.message)
         }
     }
-
+    
     useEffect(() => {
         getStores()
         getCategories()
         getProducts()
     }, [])
-
+    
     useEffect(() => {
         getProducts()
     }, [skip])
-
-
+    
+    const productsData = useSelector(state => state.products.all)
+    
     // Filter search
     let [filteredProductsList, setFilteredProductsList] = useState(productsData)
-
+    
     useEffect(() => {
         setFilteredProductsList(productsData)
     }, [productsData])
@@ -110,14 +101,14 @@ export default function Products() {
 
     const filterByStoreName = (filterValue) => {
         const filteredProductsByStore = productsData.filter(product => {
-            return ( (filterValue === '') || (product.store._id === filterValue) )
+            return ((filterValue === '') || (product.store._id === filterValue))
         })
         setFilteredProductsList(filteredProductsByStore)
     }
 
     const filterByCategoryName = (filterValue) => {
         const filteredProductsByCategory = productsData.filter(product => {
-            return ( (filterValue === '') || (product.category._id === filterValue) )
+            return ((filterValue === '') || (product.category._id === filterValue))
         })
         setFilteredProductsList(filteredProductsByCategory)
     }
@@ -128,17 +119,17 @@ export default function Products() {
             <div className='shadow-lg p-3 mx-5 rounded'>
                 <div className='search row'>
                     <div className="col-4 mt-5 mb-4">
-                        <SelectCategory handleCategoryFilter={filterByCategoryName}/>
+                        <SelectCategory handleCategorySelect={filterByCategoryName} />
                     </div>
                     <div className="col-4 mt-5 mb-4">
-                        <SelectStore handleStoreFilter={filterByStoreName} />
+                        <SelectStore handleStoreSelect={filterByStoreName} />
                     </div>
                     <div className="add-button col-4 mt-5 mb-4">
                         <div>
-                            <button disabled className='custom-button px-1 py-1 rounded-pill' onClick={handleShow}>
-                                <i className="px-2 bi bi-plus-circle"></i>Add New Product
+                            <button className='custom-button px-1 py-1 rounded-pill' onClick={handleShow}>
+                                <i className="px-2 bi bi-plus-circle"> Add New Product </i>
                             </button>
-                            <AddProduct  show={showAddModal} handleClose={handleClose} />
+                            <AddProduct show={showAddModal} handleClose={handleClose} />
                         </div>
                     </div>
                 </div>

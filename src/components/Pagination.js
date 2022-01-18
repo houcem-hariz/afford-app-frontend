@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-export default function StorePagination({ storesPerPage, totalStoresCount, paginate }) {
+export default function Pagination({ itemsPerPage, totalItemsCount, paginate }) {
     const pageNumbers = [];
     const [currentPage, setCurrentPage] = useState(1)
 
-    for (let i = 1; i <= Math.ceil(totalStoresCount / storesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalItemsCount / itemsPerPage); i++) {
       pageNumbers.push(i);
     }
 
@@ -28,7 +28,7 @@ export default function StorePagination({ storesPerPage, totalStoresCount, pagin
 
     useEffect(()=> {
       return () => setCurrentPage(1)
-    }, [totalStoresCount])
+    }, [totalItemsCount])
   
     const pages = generatePageNumbers()
     return (

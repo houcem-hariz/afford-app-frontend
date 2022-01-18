@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import AddStore from '../components/Stores/AddStore'
 import SearchBar from '../components/Stores/SearchBar'
-import StorePagination from '../components/Stores/StorePagination'
+import Pagination from '../components/Pagination'
 import StoresTable from '../components/Stores/StoresTable'
 import { setAllStores } from '../redux/actions/storesActionCreator'
 import { alertError } from '../utils/feedback'
@@ -82,7 +82,7 @@ export default function Stores() {
                     <div className="col-xs-12 col-sm-6 col-md-4 mt-5 mb-4">
                         <div>
                             <button title='Add' className='custom-button px-1 py-1 rounded-pill' onClick={handleShow}>
-                                <i className="px-2 bi bi-plus-circle">Add New Store</i>
+                                <i className="px-2 bi bi-plus-circle"> Add New Store </i>
                             </button>
                         </div>
                         <AddStore show={showAddModal} handleClose={handleClose} />
@@ -93,9 +93,9 @@ export default function Stores() {
                         <StoresTable storesList={filteredStoresList} skip={skip} />}
                 </div>
                 <div className='row'>
-                    <StorePagination
-                        storesPerPage={storesPerPage}
-                        totalStoresCount={totalStoresCount}
+                    <Pagination
+                        itemsPerPage={storesPerPage}
+                        totalItemsCount={totalStoresCount}
                         paginate={paginate}
                     />
                 </div>

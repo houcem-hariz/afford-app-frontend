@@ -10,12 +10,6 @@
   --tertiary-color: #e3afbc;
   --quaternary-color: #9a1750;
   --quinary-color: #ee4c7c;
-
-  --primary-color-dark: #232730;
-  --secondary-color-dark: #c5f851;
-  --tertiary-color-dark: #e3afbc;
-  --quaternary-color-dark: #9a1750;
-  --quinary-color-dark: #ee4c7c;
 }
 
 .navbar-brand, .nav-link {
@@ -38,10 +32,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body.dark-theme {
-  background-color: black !important;
-}
-
 h1, h2, h5 {
   color: var(--primary-color);
 }
@@ -55,59 +45,6 @@ h1, h2, h5 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.toggle-theme-button {
-  margin: 0.25rem;
-}
-
-body.dark {
-  background-color: #292c35;
-}
-.checkbox {
-  opacity: 0;
-  position: absolute;
-}
-
-.label {
-  width: 30px;
-  height: 16px;
-  background-color:#111;
-  display: flex;
-  border-radius: 30px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px;
-  position: relative;
-  transform: scale(1.5);
-}
-
-.ball {
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  position: absolute;
-  top: 3px;
-  left: 4px;
-  border-radius: 50%;
-  transition: transform 0.2s linear;
-}
-
-/*  target the elemenent after the label*/
-.checkbox:checked + .label .ball{
-  transform: translateX(12px);
-}
-
-.label i {
-  font-size: 0.5rem;
-}
-
-.bi-moon-fill {
-  color: pink;
-}
-
-.bi-brightness-high-fill {
-  color: yellow;
 }
 
 .toast-success div {
@@ -135,7 +72,6 @@ body.dark {
   background-color: var(--quaternary-color) !important;
   border-color: var(--quaternary-color) !important;
   color: var(--secondary-color) !important;
-  /* border-width: 1px; */
 }
 
 .custom-button:hover {
@@ -180,7 +116,13 @@ body.dark {
 }
 
 .custom-form-check {
-  margin: 1rem 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--quaternary-color) !important;
+  border-color: var(--quaternary-color) !important;
 }
 
 .custom-select:disabled {
@@ -188,7 +130,6 @@ body.dark {
   background-color: #cccccc;
   color: #666666;
 }
-
 
 .custom-page-link {
   background-color: var(--secondary-color) !important;
@@ -235,6 +176,14 @@ body.dark {
 
 .list-group-item {
   background-color: transparent !important;
+}
+
+.not-found-page-image {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 @media not all and (min-width: 576px) {

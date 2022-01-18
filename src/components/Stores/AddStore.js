@@ -48,15 +48,12 @@ export default function AddStore(props) {
                 
             if (res.data && res.data.message && res.data.createdStore) {
                 alertSuccess(res.data.message)
-                console.log('in FRONT END');
-                console.log({store: res.data.createdStore});
                 // dispatch new action with the created store as a payload
                 dispatch( addStore(res.data.createdStore) )
             }
 
 
         } catch (err) {
-            console.log({ err });
             if (err && err.response && err.response.data && err.response.data.error && err.response.data.error.details) {
                 return alertError(err.response.data.error.details[0] && err.response.data.error.details[0].message)
             }
@@ -87,7 +84,7 @@ export default function AddStore(props) {
                             <div className="form-group">
                                 <input type="text" className="form-control" id="name"  placeholder="Enter Name" value={newStoreData.name}
                                     onChange={handleChange}
-                                    name='name' />
+                                    name='name' required/>
                             </div>
                             <div className="form-group mt-3">
                                 <input type="text" className="form-control" id="type"  placeholder="Enter Type" value={newStoreData.storeType}

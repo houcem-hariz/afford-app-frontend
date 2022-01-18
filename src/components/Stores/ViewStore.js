@@ -8,6 +8,7 @@ import Tr from '../Tr'
 import storeImage from '../../images/logo.png'
 
 import { alertError } from '../../utils/feedback'
+import Loading from '../Loading'
 
 export default function ViewStore() {
     const token = useSelector(state => state.user.token)
@@ -18,11 +19,17 @@ export default function ViewStore() {
         location: '',
         description: ''
     })
+
+    // Loading data
+    const [isDataLoaded, setIsDataLoaded] = useState(false)
+
     const getStoreById = async (id) => {
         try {
+            setIsDataLoaded(false)
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/stores/${id}`, { headers: { authorization: token } })
             const { name, storeType, location, description } = res.data
-            setStoreData({  name, storeType, location, description })
+            setStoreData({ name, storeType, location, description })
+            setIsDataLoaded(true)
         } catch (error) {
             alertError(error.message)
         }
@@ -35,6 +42,7 @@ export default function ViewStore() {
         <div className="text-center">
             <h1>Store details</h1>
             {
+                !isDataLoaded ? <Loading /> :
                 storeData.name && (
                     <>
                         <img alt="item-img" className="img-thumbnail image-size mb-3" src={storeImage} />

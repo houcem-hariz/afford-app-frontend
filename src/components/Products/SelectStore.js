@@ -1,18 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+import axios from 'axios';
+import { alertError } from '../../utils/feedback';
 
 
 export default function SelectStore(props) {
+       
+    const token = useSelector(state => state.user.token)
+
+    const [storesList, setStoresList] = useState([]);
     
-    const storesList = useSelector(state => state.stores.all)
+    useEffect(() => { 
+        const getAllStores = async () => {
+            try {
+                const result = await axios.get(`${process.env.REACT_APP_API_URL}/stores`, { headers: { authorization: token } }) 
+                setStoresList(result.data.stores)
+            }
+            catch (error) {
+                alertError(error.message)  
+            }
+        }
+        getAllStores() 
+        
+    }, [])
+
     const [filter, setFilter] = useState('- - -')
 
     const handleSelect = (event) => {
         const storeIndex = event.target.selectedIndex
         setFilter(event.target.value)
-        if ( storeIndex === 0) props.handleStoreFilter('') // no store is selected
-        else props.handleStoreFilter(storesList[storeIndex -1]._id)
+        if (storeIndex === 0) props.handleStoreSelect('') // no store is selected
+        else props.handleStoreSelect(storesList[storeIndex - 1]._id)
     }
 
     const storesOptions = storesList.map(store => {
