@@ -14,7 +14,9 @@ export default function UserNavbar(props) {
                     {user.firstName}
                 </a>
                 <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-dark-custom" aria-labelledby="userNavbarDarkDropdownMenuLink">
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
+                    <li><a className="dropdown-item" onClick={() => {
+                        history.push('/profile')
+                    }}>Profile</a></li>
                     <li><a className="dropdown-item" onClick={() => {
                         localStorage.removeItem('user')
                         dispatch(logout())

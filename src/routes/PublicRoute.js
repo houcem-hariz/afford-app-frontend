@@ -10,7 +10,7 @@ function PublicRoute({component: Component, ...rest}) {
         render={(props) => (
             !isAuth 
             ? <Component />
-            : <Redirect to={{pathname: '/stores', state: {from: props.location}}} />
+            : <Redirect to={{pathname: '/home', state: {from: props.location}}} />
         )}
         />
     )

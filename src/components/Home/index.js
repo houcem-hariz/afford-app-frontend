@@ -14,15 +14,15 @@ export default function Home() {
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src={stores} className="d-block w-300" alt="stores image" />
-                        <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia, saepe.</h2>
+                        <h2 className='text-center'>A powerful management tool for your business</h2>
                     </div>
                     <div className="carousel-item">
                         <img src={categories} className="d-block w-300" alt="categories image" />
-                        <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia, saepe.</h2>
+                        <h2 className='text-center'>Track all your stores, categories and products</h2>
                     </div>
                     <div className="carousel-item">
                         <img src={products} className="d-block w-300" alt="products image" />
-                        <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia, saepe.</h2>
+                        <h2 className='text-center'>Have a total control over your business</h2>
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

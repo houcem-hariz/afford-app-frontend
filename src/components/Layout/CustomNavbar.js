@@ -11,7 +11,7 @@ export default function CustomNavbar() {
                 <NavLink className="nav-link" to={"/stores"}>Stores</NavLink>
                 <NavLink className="nav-link" to={"/categories"}>Categories</NavLink>
                 <NavLink className="nav-link" to={"/products"}>Products</NavLink>
-                <NavLink className="nav-link" to={"/users"}>Users</NavLink>
+                <NavLink className="nav-link disabled" to={"/users"}>Users</NavLink>
             </Nav> : <Nav className="me-auto"></Nav>
     )
 }

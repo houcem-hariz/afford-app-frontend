@@ -21,6 +21,7 @@ import UpdateCategory from './components/Categories/UpdateCategory';
 import NotFound from './pages/NotFound';
 import ViewProduct from './components/Products/ViewProduct';
 import UpdateProduct from './components/Products/UpdateProduct';
+import Profile from './pages/Profile';
 
 function App() {
   const dispatch = useDispatch()
@@ -45,6 +46,7 @@ function App() {
         <PrivateRoute exact path="/products" component={Products} />
         <PrivateRoute exact path="/products/:id" component={ViewProduct} />
         <PrivateRoute exact path="/products/update/:id" component={UpdateProduct} />
+        <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/users" component={Users} />
         <Route component={NotFound} />
       </Switch>
